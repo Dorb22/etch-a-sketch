@@ -1,4 +1,50 @@
+body{
+    display: flex;
+    margin: 0;
+}
+
+.side{
+    background-color: #DCCDE8;
+    width: 30%;
+    height: 100vh;
+}
+
+.right{
+    background-color: #D99AC5;
+    width: 70%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container{
+    background-color: white;
     height: 550px;
     width: 550px;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(-10px 10px 10px rgba(0, 0, 0, 0.474));
 }
+
+.title{
+    font-size: 100px;
+    font-weight: 700;
+    animation: titlecolor 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes titlecolor {
+    0%{
+        color: #14BDEB
+    }
+    100%{
+        color: #D99AC5;
+    }
+}
+
+.startbutton{
+    padding: 4px 20px 4px 20px;
+}
+
