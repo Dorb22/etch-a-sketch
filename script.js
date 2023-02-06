@@ -8,6 +8,7 @@ container.style.border = '#D99AC5 solid 1px';
 const containerHeight = parseFloat(getComputedStyle(container).height);
 const containerWidth = parseFloat(getComputedStyle(container).width);
 let grid;
+let state;
 const gridNumber = 16;
 let gridColor = 'black';
 
@@ -29,14 +30,23 @@ start.appendChild(startButton);
 startButton.addEventListener('click', () => {
     container.removeChild(start);
     makeGrid();
+    selectGrid();
+});
+
+function selectGrid() {
     const allGrid = document.querySelectorAll('.unit');
     const gridArray = Array.from(allGrid);
     for(let i=0; i < gridArray.length; i++){
     gridArray[i].addEventListener('mouseover', () => {
-        gridArray[i].style.backgroundColor = 'pink';
+        if (state === 'psychedelic'){
+        let randomColor = '#' + (Math.floor(Math.random()*16777215).toString(16));
+        gridArray[i].style.backgroundColor = randomColor;
+        }
+        else gridArray[i].style.backgroundColor = gridColor;
     })
 }
-});
+}
+
 startButton.addEventListener('mouseover', () => {
     startButton.style.backgroundColor = '#14BDEB';
     startButton.style.scale = '1.1';
@@ -68,34 +78,20 @@ const psychedelicButton = document.createElement('button');
 psychedelicButton.textContent = 'Psychedelic Mode';
 side.appendChild(psychedelicButton);
 
-
-psychedelicButton.addEventListener('click', () =>{
-    let randomCharacter;
-    const randomNumber = Math.floor(Math.random() * 16);
-    switch (randomNumber){
-        case 10:
-            randomCharacter = 'A';
-            break;
-        case 11:
-            randomCharacter = 'B'; 
-            break;
-        case 12:
-            randomCharacter = 'C';
-            break;
-        case 13:
-            randomCharacter = 'D';
-            break;
-        case 14:
-            randomCharacter = 'E';
-            break;
-        case 15:
-            randomCharacter = 'F';
-            break;
-        default: randomCharacter = randomNumber;
-    }
-    console.log(randomCharacter);   
+let stateCount = 0;
+psychedelicButton.addEventListener('click', () => {
+    ++stateCount;
+    console.log(stateCount);
+    if (stateCount % 2 !== 0){
+    state = 'psychedelic';
+    } else if (stateCount % 2 === 0)
+    state = 'normal';
+    console.log (state);
 }
 );
+    
+
+
 
 
 
