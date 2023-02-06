@@ -1,5 +1,6 @@
 const body = document.querySelector('.body')
 const container = document.querySelector('.container');
+const side = document.querySelector('.side');
 const right = document.querySelector('.right');
 container.style.display = 'flex';
 container.style.flexWrap = 'wrap';
@@ -8,7 +9,7 @@ const containerHeight = parseFloat(getComputedStyle(container).height);
 const containerWidth = parseFloat(getComputedStyle(container).width);
 let grid;
 const gridNumber = 16;
-const gridColor = 'black';
+let gridColor = 'black';
 
 
 const start = document.createElement('div');
@@ -61,6 +62,41 @@ function styleGrid() {
     grid.style.border = 'black solid 1px';
     grid.style.boxSizing = 'border-box';
 }
+
+//left side
+const psychedelicButton = document.createElement('button');
+psychedelicButton.textContent = 'Psychedelic Mode';
+side.appendChild(psychedelicButton);
+
+
+psychedelicButton.addEventListener('click', () =>{
+    let randomCharacter;
+    const randomNumber = Math.floor(Math.random() * 16);
+    switch (randomNumber){
+        case 10:
+            randomCharacter = 'A';
+            break;
+        case 11:
+            randomCharacter = 'B'; 
+            break;
+        case 12:
+            randomCharacter = 'C';
+            break;
+        case 13:
+            randomCharacter = 'D';
+            break;
+        case 14:
+            randomCharacter = 'E';
+            break;
+        case 15:
+            randomCharacter = 'F';
+            break;
+        default: randomCharacter = randomNumber;
+    }
+    console.log(randomCharacter);   
+}
+);
+
 
 
 
