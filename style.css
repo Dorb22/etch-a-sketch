@@ -9,11 +9,17 @@ body{
     height: 100vh;
 }
 
+.selectmode{
+    font-style: italic;
+    font-weight: 300;
+}
+
 .right{
     background-color: #D99AC5;
     width: 70%;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -35,9 +41,27 @@ body{
     animation: titlecolor 1.2s ease-in-out infinite alternate;
 }
 
+.aftertitle{
+    color: #B37BA4;
+    position: absolute;
+    top: 0px;
+    font-weight: 700;
+    font-size: 100px;
+    animation: showtitle 1s ease-in forwards;
+}
+
+@keyframes showtitle {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
 @keyframes titlecolor {
     0%{
-        color: #14BDEB
+        color: #14BDEB;
     }
     100%{
         color: #D99AC5;
@@ -46,5 +70,7 @@ body{
 
 .startbutton{
     padding: 4px 20px 4px 20px;
+    position: absolute;
+    bottom: 180px;
 }
 

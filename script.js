@@ -7,11 +7,13 @@ container.style.flexWrap = 'wrap';
 container.style.border = '#D99AC5 solid 1px';
 const containerHeight = parseFloat(getComputedStyle(container).height);
 const containerWidth = parseFloat(getComputedStyle(container).width);
+const aftertitle = document.querySelector('.aftertitle');
 let grid;
 let state;
 let gridNumber;
 let gridColor = 'black';
 
+right.removeChild(aftertitle);
 
 const start = document.createElement('div');
 start.style.cssText = 'display: flex; flex-direction: column;justify-content: center; align-items: center;';
@@ -33,6 +35,7 @@ startButton.addEventListener('click', () => {
     makeGrid();
     selectGrid();
     fillGrid();
+    right.appendChild(aftertitle);
 });
 
 let allGrid;
@@ -105,8 +108,13 @@ function removeGrid(){
     }
 }
 
+const selectMode = document.createElement('div');
+selectMode.classList.add('selectmode');
+selectMode.textContent = 'Click to toggle between modes';
+side.appendChild(selectMode);
+
 const psychedelicButton = document.createElement('button');
-psychedelicButton.textContent = 'Psychedelic Mode';
+psychedelicButton.textContent = `Normal Mode`;
 side.appendChild(psychedelicButton);
 
 let stateCount = 0;
@@ -114,7 +122,13 @@ psychedelicButton.addEventListener('click', () => {
     ++stateCount;
     if (stateCount % 2 !== 0){
     state = 'psychedelic';
-    } else state = 'normal';
+    psychedelicButton.textContent = `Psychedelic Mode`;
+    psychedelicButton.style.backgroundColor = '#14BDEB';
+    } else if (stateCount % 2 === 0){
+        state = 'normal';
+        psychedelicButton.textContent = `Normal Mode`;
+        psychedelicButton.style.backgroundColor = null;
+    }
 }
 );
 
