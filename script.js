@@ -9,7 +9,7 @@ const containerHeight = parseFloat(getComputedStyle(container).height);
 const containerWidth = parseFloat(getComputedStyle(container).width);
 let grid;
 let state;
-const gridNumber = 16;
+let gridNumber;
 let gridColor = 'black';
 
 
@@ -29,22 +29,30 @@ startButton.style.cssText = 'background-color: #B37BA4; font-size: 35px; color: 
 start.appendChild(startButton);
 startButton.addEventListener('click', () => {
     container.removeChild(start);
+    right.appendChild(container);
     makeGrid();
     selectGrid();
+    fillGrid();
 });
 
+let allGrid;
+let gridArray;
+
 function selectGrid() {
-    const allGrid = document.querySelectorAll('.unit');
-    const gridArray = Array.from(allGrid);
-    for(let i=0; i < gridArray.length; i++){
-    gridArray[i].addEventListener('mouseover', () => {
-        if (state === 'psychedelic'){
-        let randomColor = '#' + (Math.floor(Math.random()*16777215).toString(16));
-        gridArray[i].style.backgroundColor = randomColor;
-        }
-        else gridArray[i].style.backgroundColor = gridColor;
-    })
+    allGrid = document.querySelectorAll('.unit');
+    gridArray = Array.from(allGrid);
 }
+
+function fillGrid(){
+    for(let i=0; i < gridArray.length; i++){
+        gridArray[i].addEventListener('mouseover', () => {
+            if (state === 'psychedelic'){
+            let randomColor = '#' + (Math.floor(Math.random()*16777215).toString(16));
+            gridArray[i].style.backgroundColor = randomColor;
+            }
+            else gridArray[i].style.backgroundColor = gridColor;
+        })
+    }
 }
 
 startButton.addEventListener('mouseover', () => {
@@ -56,8 +64,9 @@ startButton.addEventListener('mouseout', () => {
     startButton.style.scale = '1';
 })
 
+
 function makeGrid () {
-    right.appendChild(container);
+    gridNumber = dimensions;
     for(let i=0; i < gridNumber * gridNumber; i++){
     grid = document.createElement('div');
     grid.style.width = `${containerWidth/gridNumber}px`;
@@ -74,6 +83,28 @@ function styleGrid() {
 }
 
 //left side
+const slider = document.querySelector('.gridnumber');
+let dimensions = slider.value;
+let dimensionsDisplay = document.createElement('div')
+dimensionsDisplay.textContent = `${dimensions} x ${dimensions}`;
+side.appendChild(dimensionsDisplay);
+
+slider.addEventListener('change', () => {
+    dimensions = slider.value;
+    dimensionsDisplay.textContent = `${dimensions} x ${dimensions}`;
+    removeGrid();
+    makeGrid();
+    selectGrid();
+    fillGrid();
+})
+
+function removeGrid(){
+    selectGrid();
+    for (i = 0; i < gridArray.length; i++){
+        container.removeChild(gridArray[i]);
+    }
+}
+
 const psychedelicButton = document.createElement('button');
 psychedelicButton.textContent = 'Psychedelic Mode';
 side.appendChild(psychedelicButton);
@@ -81,15 +112,20 @@ side.appendChild(psychedelicButton);
 let stateCount = 0;
 psychedelicButton.addEventListener('click', () => {
     ++stateCount;
-    console.log(stateCount);
     if (stateCount % 2 !== 0){
     state = 'psychedelic';
-    } else if (stateCount % 2 === 0)
-    state = 'normal';
-    console.log (state);
+    } else state = 'normal';
 }
 );
+
+
+
+
+
     
+
+
+
 
 
 
