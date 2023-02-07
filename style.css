@@ -9,6 +9,10 @@ body{
     height: 100vh;
 }
 
+.colorpicker{
+    border-style: none;
+}
+
 .selectmode{
     font-style: italic;
     font-weight: 300;
@@ -72,5 +76,6 @@ body{
     padding: 4px 20px 4px 20px;
     position: absolute;
     bottom: 180px;
+    color: #00000021;
 }
 

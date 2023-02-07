@@ -9,9 +9,16 @@ const containerHeight = parseFloat(getComputedStyle(container).height);
 const containerWidth = parseFloat(getComputedStyle(container).width);
 const aftertitle = document.querySelector('.aftertitle');
 let grid;
-let state;
+let state = 'normal';
 let gridNumber;
-let gridColor = 'black';
+
+let gridColor;
+const colorpicker = side.querySelector('.colorpicker');
+let pickedColor = colorpicker.value;
+colorpicker.addEventListener('change', () => {
+    pickedColor = colorpicker.value;
+    gridColor = pickedColor;
+})
 
 right.removeChild(aftertitle);
 
@@ -53,7 +60,14 @@ function fillGrid(){
             let randomColor = '#' + (Math.floor(Math.random()*16777215).toString(16));
             gridArray[i].style.backgroundColor = randomColor;
             }
-            else gridArray[i].style.backgroundColor = gridColor;
+            else if (state === 'normal') {
+                gridArray[i].style.backgroundColor = gridColor;
+            }
+            else if (state === 'shadow'){
+                gridArray[i].style.backgroundColor = `#00000021`;
+                console.log(gridColor);
+                console.log(state);
+            }
         })
     }
 }
@@ -117,17 +131,27 @@ const psychedelicButton = document.createElement('button');
 psychedelicButton.textContent = `Normal Mode`;
 side.appendChild(psychedelicButton);
 
-let stateCount = 0;
+let psychedelicCount = 0;
+psychedelicButton.textContent = `Normal Mode`;
+psychedelicButton.classList.add = 'normal';
+psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; background-color: #efeded; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
 psychedelicButton.addEventListener('click', () => {
-    ++stateCount;
-    if (stateCount % 2 !== 0){
-    state = 'psychedelic';
-    psychedelicButton.textContent = `Psychedelic Mode`;
-    psychedelicButton.style.backgroundColor = '#14BDEB';
-    } else if (stateCount % 2 === 0){
+    if (state === 'normal') {
+        state = 'psychedelic';
+        psychedelicButton.textContent = 'Psychedelic Mode';
+        psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; background-image: linear-gradient(80deg, #D99AC5, #14BDEB); border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+    }
+    else if (state === 'psychedelic') {
+        state = 'shadow';
+        psychedelicButton.textContent = 'Shadow Mode';
+        psychedelicButton.classList.add = 'shadow';
+        psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; color: white; background-color: black; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+    }
+    else {
         state = 'normal';
-        psychedelicButton.textContent = `Normal Mode`;
-        psychedelicButton.style.backgroundColor = null;
+        psychedelicButton.textContent = 'Normal Mode';
+        psychedelicButton.classList.add = 'normal';
+        psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; background-color: #efeded; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
     }
 }
 );
