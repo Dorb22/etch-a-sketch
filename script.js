@@ -169,7 +169,7 @@ function makeGrid () {
     }
 }
 
-function styleGrid() {
+function styleGrid(format) {
     grid.style.border = 'black solid 1px';
     grid.style.boxSizing = 'border-box';
 }
@@ -253,6 +253,31 @@ eraser.addEventListener('click', () => {
     if (erase === 'no') erase = 'yes';
     else if (erase === 'yes') erase = 'no';
 });
+
+const noGrid = document.createElement('button');
+noGrid.textContent = 'Remove Grid';
+noGrid.classList.add('nogrid');
+side.appendChild(noGrid);
+
+let gridPresence = 'yes';
+noGrid.addEventListener('click', () => {
+    if (gridPresence === 'yes'){
+        noGrid.textContent = 'Add Grid';
+        selectGrid();
+        for (let i = 0; i < gridArray.length; i++){
+            gridArray[i].style.borderColor = 'rgb(0, 0, 0, 0)';
+        }   
+        gridPresence = 'no';
+    }
+    else if(gridPresence === 'no'){
+        noGrid.textContent = 'Remove Grid';
+        selectGrid();
+        for (let i = 0; i < gridArray.length; i++){
+            gridArray[i].style.borderColor = 'black';
+        } 
+        gridPresence = 'yes';
+    }
+})
 
 const clear = document.createElement('button');
 clear.classList.add('clear');
