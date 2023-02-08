@@ -107,7 +107,7 @@ function fillGrid(){
                     let hexa = rgbToHex(+rValue, +gValue, +bValue);
                     gridArray[i].style.backgroundColor = newShade(hexa, 20);
             }
-            else if (erase === 'yes'){
+            else if (erase === 'yes' && condition === 'clicked'){
                 gridArray[i].style.backgroundColor = 'rgb(255, 255, 255)';
             }
             else return;
@@ -205,7 +205,7 @@ side.appendChild(colorSection);
 
 const selectMode = document.createElement('div');
 selectMode.classList.add('selectmode');
-selectMode.textContent = 'Click to toggle between modes';
+selectMode.textContent = 'CLICK TO TOGGLE BETWEEN MODES';
 colorSection.appendChild(selectMode);
 
 const psychedelicButton = document.createElement('button');
@@ -213,56 +213,66 @@ psychedelicButton.textContent = `Normal Mode`;
 colorSection.appendChild(psychedelicButton);
 
 let psychedelicCount = 0;
-psychedelicButton.textContent = `Normal Mode`;
+psychedelicButton.textContent = `NORMAL`;
 psychedelicButton.classList.add = 'normal';
-psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; background-color: #efeded; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+psychedelicButton.style.cssText = 'width: 250px; height: 250px; font-size: 15px; font-family: pixeled, sans-serif; background-color: #efeded; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
 psychedelicButton.addEventListener('click', () => {
     if (state === 'normal') {
         state = 'psychedelic';
-        psychedelicButton.textContent = 'Psychedelic Mode';
-        psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; background-image: linear-gradient(80deg, #D99AC5, #14BDEB); border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+        psychedelicButton.textContent = 'PSYCHEDELIC';
+        psychedelicButton.style.cssText = 'color: white; width: 250px; height: 250px; font-size: 15px; background-image: linear-gradient(80deg, #D99AC5, #14BDEB); border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;); font-family: pixeled, sans-serif;';
     }
     else if (state === 'psychedelic') {
         state = 'shadow';
-        psychedelicButton.textContent = 'Shadow Mode';
+        psychedelicButton.textContent = 'SHADOW';
         psychedelicButton.classList.add = 'shadow';
-        psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; color: white; background-color: black; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+        psychedelicButton.style.cssText = 'width: 250px; height: 250px; font-size: 15px; font-family: pixeled, sans-serif; color: white; background-color: black; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
     }
     else if (state === 'shadow'){
         state = 'light';
-        psychedelicButton.textContent = 'Lighten Mode';
+        psychedelicButton.textContent = 'LIGHTEN';
         psychedelicButton.classList.add = 'light';
-        psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; background-color: #ffffae; line; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+        psychedelicButton.style.cssText = 'width: 250px; height: 250px; font-size: 15px; font-family: pixeled, sans-serif; background-color: #ffffae; line; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
     }
     else {
         state = 'normal';
-        psychedelicButton.textContent = 'Normal Mode';
+        psychedelicButton.textContent = 'NORMAL';
         psychedelicButton.classList.add = 'normal';
-        psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; background-color: #efeded; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+        psychedelicButton.style.cssText = 'width: 250px; height: 250px; font-size: 15px; font-family: pixeled, sans-serif; background-color: #efeded; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
     }
 }
 );
 
+const options = document.createElement('div');
+options.classList.add('options');
+side.appendChild(options);
+
 const eraser = document.createElement('button')
 eraser.classList.add('eraser');
-eraser.textContent = 'Erase';
-side.appendChild(eraser);
+eraser.textContent = 'ERASE';
+options.appendChild(eraser);
 
 let erase = 'no';
 eraser.addEventListener('click', () => {
-    if (erase === 'no') erase = 'yes';
-    else if (erase === 'yes') erase = 'no';
+    if (erase === 'no') {
+        erase = 'yes';
+        eraser.style.background = '#915280';
+    }
+    else if (erase === 'yes') {
+        erase = 'no';
+        eraser.style.background = '#B37BA4';
+    }
 });
 
 const noGrid = document.createElement('button');
-noGrid.textContent = 'Remove Grid';
+noGrid.textContent = 'REMOVE GRID';
 noGrid.classList.add('nogrid');
-side.appendChild(noGrid);
+options.appendChild(noGrid);
 
 let gridPresence = 'yes';
 noGrid.addEventListener('click', () => {
     if (gridPresence === 'yes'){
-        noGrid.textContent = 'Add Grid';
+        noGrid.textContent = 'ADD GRID';
         selectGrid();
         for (let i = 0; i < gridArray.length; i++){
             gridArray[i].style.borderColor = 'rgb(0, 0, 0, 0)';
@@ -270,7 +280,7 @@ noGrid.addEventListener('click', () => {
         gridPresence = 'no';
     }
     else if(gridPresence === 'no'){
-        noGrid.textContent = 'Remove Grid';
+        noGrid.textContent = 'REMOVE GRID';
         selectGrid();
         for (let i = 0; i < gridArray.length; i++){
             gridArray[i].style.borderColor = 'black';
@@ -281,14 +291,16 @@ noGrid.addEventListener('click', () => {
 
 const clear = document.createElement('button');
 clear.classList.add('clear');
-clear.textContent= 'Clear Canvas';
-side.appendChild(clear);
+clear.textContent= 'RESET CANVAS';
+options.appendChild(clear);
 
 clear.addEventListener('click', () => {
     removeGrid();
     makeGrid();
     selectGrid();
     fillGrid();
+    noGrid.textContent = 'REMOVE GRID';
+    gridPresence = 'yes';
 })
 
 
