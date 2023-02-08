@@ -254,6 +254,17 @@ eraser.addEventListener('click', () => {
     else if (erase === 'yes') erase = 'no';
 });
 
+const clear = document.createElement('button');
+clear.classList.add('clear');
+clear.textContent= 'Clear Canvas';
+side.appendChild(clear);
+
+clear.addEventListener('click', () => {
+    removeGrid();
+    makeGrid();
+    selectGrid();
+    fillGrid();
+})
 
 
     
