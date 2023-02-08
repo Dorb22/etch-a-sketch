@@ -62,14 +62,14 @@ function fillGrid(){
     let gridBackground;
     for(let i=0; i < gridArray.length; i++){
         gridArray[i].addEventListener('mouseover', () => {
-            if (state === 'psychedelic' && condition === 'clicked'){  
+            if (state === 'psychedelic' && condition === 'clicked' && erase === 'no'){  
                 let randomColor = '#' + (Math.floor(Math.random()*16777215).toString(16));
                 gridArray[i].style.backgroundColor = randomColor;
             }
-            else if (state === 'normal' && condition === 'clicked') {
+            else if (state === 'normal' && condition === 'clicked' && erase === 'no') {
                 gridArray[i].style.backgroundColor = gridColor;
             }
-            else if (state === 'shadow' && condition === 'clicked') {
+            else if (state === 'shadow' && condition === 'clicked' && erase === 'no') {
                 if(gridArray[i].style.backgroundColor === ''){
                 gridBackground = 'rgb(255, 255, 255)';
                 }
@@ -88,7 +88,7 @@ function fillGrid(){
                 let hexa = rgbToHex(+rValue, +gValue, +bValue);
                 gridArray[i].style.backgroundColor = newShade(hexa, -20);
             }
-            else if (state === 'light' && condition === 'clicked'){
+            else if (state === 'light' && condition === 'clicked' && erase === 'no'){
                 if(gridArray[i].style.backgroundColor === ''){
                     gridBackground = 'rgb(255, 255, 255)';
                     }
@@ -106,6 +106,9 @@ function fillGrid(){
                     let bValue = rgbArray[2];
                     let hexa = rgbToHex(+rValue, +gValue, +bValue);
                     gridArray[i].style.backgroundColor = newShade(hexa, 20);
+            }
+            else if (erase === 'yes'){
+                gridArray[i].style.backgroundColor = 'rgb(255, 255, 255)';
             }
             else return;
         })
@@ -240,7 +243,16 @@ psychedelicButton.addEventListener('click', () => {
 }
 );
 
+const eraser = document.createElement('button')
+eraser.classList.add('eraser');
+eraser.textContent = 'Erase';
+side.appendChild(eraser);
 
+let erase = 'no';
+eraser.addEventListener('click', () => {
+    if (erase === 'no') erase = 'yes';
+    else if (erase === 'yes') erase = 'no';
+});
 
 
 
