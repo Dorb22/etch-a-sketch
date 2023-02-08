@@ -74,7 +74,6 @@ function fillGrid(){
                 else{ 
                 gridBackground = gridArray[i].style.backgroundColor;
                 }
-
                 let remove1 = gridBackground.replace('rgb(', '');
                 let remove2 = remove1.replace(')', '');
                 let rgbArray  = remove2.split(', ');
@@ -83,6 +82,25 @@ function fillGrid(){
                 let bValue = rgbArray[2];
                 let hexa = rgbToHex(+rValue, +gValue, +bValue);
                 gridArray[i].style.backgroundColor = newShade(hexa, -20);
+            }
+            else {
+                if(gridArray[i].style.backgroundColor === ''){
+                    gridBackground = 'rgb(255, 255, 255)';
+                    }
+                    else if (gridArray[i].style.backgroundColor === 'rgb(0, 0, 0)'){
+                    gridBackground = 'rgb(0, 0, 0)';
+                    }
+                    else{ 
+                    gridBackground = gridArray[i].style.backgroundColor;
+                    }
+                    let remove1 = gridBackground.replace('rgb(', '');
+                    let remove2 = remove1.replace(')', '');
+                    let rgbArray  = remove2.split(', ');
+                    let rValue = rgbArray[0];
+                    let gValue = rgbArray[1];
+                    let bValue = rgbArray[2];
+                    let hexa = rgbToHex(+rValue, +gValue, +bValue);
+                    gridArray[i].style.backgroundColor = newShade(hexa, 20);
             }
         })
     }
@@ -194,6 +212,12 @@ psychedelicButton.addEventListener('click', () => {
         psychedelicButton.textContent = 'Shadow Mode';
         psychedelicButton.classList.add = 'shadow';
         psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; color: white; background-color: black; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+    }
+    else if (state === 'shadow'){
+        state = 'light';
+        psychedelicButton.textContent = 'Lighten Mode';
+        psychedelicButton.classList.add = 'light';
+        psychedelicButton.style.cssText = 'width: 250px; height: 50px; font-size: 20px; background-color: #ffffae; line; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
     }
     else {
         state = 'normal';
