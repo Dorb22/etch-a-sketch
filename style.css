@@ -11,12 +11,14 @@ body{
 
 .side{
     background-color: #dccde8;
+    box-sizing: border-box;
     width: 30%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    padding: 20px;
 }
 
 .colorpicker{
@@ -27,7 +29,7 @@ body{
 }
 
 .selectmode{
-    font-size: 10px;
+    font-size: 8px;
     text-align: center;
 } 
 
@@ -39,12 +41,13 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .container{
     background-color: white;
-    height: 550px;
-    width: 550px;
+    height: 600px;
+    width: 600px;
     display: flex;
     flex-shrink: 0;
     justify-content: center;
@@ -145,7 +148,7 @@ body{
     width: 250px;
     font-size: 10px;
     border-style: none;
-    background-color: #B37BA4;
+    background-color: #14BDEB;
     color: white;
     font-family: pixeled, sans-serif;
 }

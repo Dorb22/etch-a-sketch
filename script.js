@@ -4,7 +4,7 @@ const side = document.querySelector('.side');
 const right = document.querySelector('.right');
 container.style.display = 'flex';
 container.style.flexWrap = 'wrap';
-container.style.border = '#D99AC5 solid 1px';
+container.style.border = '5px double #14BDEB';
 const containerHeight = parseFloat(getComputedStyle(container).height);
 const containerWidth = parseFloat(getComputedStyle(container).width);
 const aftertitle = document.querySelector('.aftertitle');
@@ -20,7 +20,6 @@ colorpicker.addEventListener('change', () => {
     gridColor = pickedColor;
 })
 
-right.removeChild(aftertitle);
 
 const start = document.createElement('div');
 start.style.cssText = 'display: flex; flex-direction: column;justify-content: center; align-items: center;';
@@ -34,7 +33,7 @@ start.appendChild(title);
 const startButton = document.createElement('button');
 startButton.classList.add('startbutton');
 startButton.textContent = 'Start';
-startButton.style.cssText = 'background-color: #B37BA4; font-size: 35px; color: white; border-style: none; transition: all 150ms ease-in-out';
+startButton.style.cssText = 'background-color: #B37BA4; font-size: 20px; font-family: pixeled, sans-serif; color: white; border-style: none; transition: all 150ms ease-in-out';
 right.appendChild(startButton);
 startButton.addEventListener('click', () => {
     right.removeChild(startButton);
@@ -43,7 +42,6 @@ startButton.addEventListener('click', () => {
     makeGrid();
     selectGrid();
     fillGrid();
-    right.appendChild(aftertitle);
 });
 
 let allGrid;
@@ -215,30 +213,30 @@ colorSection.appendChild(psychedelicButton);
 let psychedelicCount = 0;
 psychedelicButton.textContent = `NORMAL`;
 psychedelicButton.classList.add = 'normal';
-psychedelicButton.style.cssText = 'width: 250px; height: 250px; font-size: 15px; font-family: pixeled, sans-serif; background-color: #efeded; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+psychedelicButton.style.cssText = 'width: 200px; height: 200px; font-size: 13px; font-family: pixeled, sans-serif; background-color: #efeded; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
 psychedelicButton.addEventListener('click', () => {
     if (state === 'normal') {
         state = 'psychedelic';
         psychedelicButton.textContent = 'PSYCHEDELIC';
-        psychedelicButton.style.cssText = 'color: white; width: 250px; height: 250px; font-size: 15px; background-image: linear-gradient(80deg, #D99AC5, #14BDEB); border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;); font-family: pixeled, sans-serif;';
+        psychedelicButton.style.cssText = 'color: white; width: 200px; height: 200px; font-size: 13px; background-image: linear-gradient(80deg, #D99AC5, #14BDEB); border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;); font-family: pixeled, sans-serif;';
     }
     else if (state === 'psychedelic') {
         state = 'shadow';
         psychedelicButton.textContent = 'SHADOW';
         psychedelicButton.classList.add = 'shadow';
-        psychedelicButton.style.cssText = 'width: 250px; height: 250px; font-size: 15px; font-family: pixeled, sans-serif; color: white; background-color: black; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+        psychedelicButton.style.cssText = 'width: 200px; height: 200px; font-size: 13px; font-family: pixeled, sans-serif; color: white; background-color: black; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
     }
     else if (state === 'shadow'){
         state = 'light';
         psychedelicButton.textContent = 'LIGHTEN';
         psychedelicButton.classList.add = 'light';
-        psychedelicButton.style.cssText = 'width: 250px; height: 250px; font-size: 15px; font-family: pixeled, sans-serif; background-color: #ffffae; line; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+        psychedelicButton.style.cssText = 'width: 200px; height: 200px; font-size: 13px; font-family: pixeled, sans-serif; background-color: #ffffae; line; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
     }
     else {
         state = 'normal';
         psychedelicButton.textContent = 'NORMAL';
         psychedelicButton.classList.add = 'normal';
-        psychedelicButton.style.cssText = 'width: 250px; height: 250px; font-size: 15px; font-family: pixeled, sans-serif; background-color: #efeded; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
+        psychedelicButton.style.cssText = 'width: 200px; height: 200px; font-size: 13px; font-family: pixeled, sans-serif; background-color: #efeded; border: 3px solid white; filter: drop-shadow(-10px 3px 2px #00000021); padding: 5px 30px 5px 30px;)';
     }
 }
 );
@@ -256,11 +254,11 @@ let erase = 'no';
 eraser.addEventListener('click', () => {
     if (erase === 'no') {
         erase = 'yes';
-        eraser.style.background = '#915280';
+        eraser.style.background = '#0b83a4';
     }
     else if (erase === 'yes') {
         erase = 'no';
-        eraser.style.background = '#B37BA4';
+        eraser.style.background = '#14BDEB';
     }
 });
 
