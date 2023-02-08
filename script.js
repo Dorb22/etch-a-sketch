@@ -35,9 +35,10 @@ const startButton = document.createElement('button');
 startButton.classList.add('startbutton');
 startButton.textContent = 'Start';
 startButton.style.cssText = 'background-color: #B37BA4; font-size: 35px; color: white; border-style: none; transition: all 150ms ease-in-out';
-start.appendChild(startButton);
+right.appendChild(startButton);
 startButton.addEventListener('click', () => {
-    container.removeChild(start);
+    right.removeChild(startButton);
+    start.removeChild(title);
     right.appendChild(container);
     makeGrid();
     selectGrid();
@@ -53,18 +54,22 @@ function selectGrid() {
     gridArray = Array.from(allGrid);
 }
 
+let condition = 'unclicked';
+container.addEventListener('mousedown', () => condition = 'clicked');
+container.addEventListener('mouseup', () => condition = 'unclicked');
+
 function fillGrid(){
     let gridBackground;
     for(let i=0; i < gridArray.length; i++){
         gridArray[i].addEventListener('mouseover', () => {
-            if (state === 'psychedelic'){  
+            if (state === 'psychedelic' && condition === 'clicked'){  
                 let randomColor = '#' + (Math.floor(Math.random()*16777215).toString(16));
                 gridArray[i].style.backgroundColor = randomColor;
             }
-            else if (state === 'normal') {
+            else if (state === 'normal' && condition === 'clicked') {
                 gridArray[i].style.backgroundColor = gridColor;
             }
-            else if (state === 'shadow') {
+            else if (state === 'shadow' && condition === 'clicked') {
                 if(gridArray[i].style.backgroundColor === ''){
                 gridBackground = 'rgb(255, 255, 255)';
                 }
@@ -83,7 +88,7 @@ function fillGrid(){
                 let hexa = rgbToHex(+rValue, +gValue, +bValue);
                 gridArray[i].style.backgroundColor = newShade(hexa, -20);
             }
-            else {
+            else if (state === 'light' && condition === 'clicked'){
                 if(gridArray[i].style.backgroundColor === ''){
                     gridBackground = 'rgb(255, 255, 255)';
                     }
@@ -102,6 +107,7 @@ function fillGrid(){
                     let hexa = rgbToHex(+rValue, +gValue, +bValue);
                     gridArray[i].style.backgroundColor = newShade(hexa, 20);
             }
+            else return;
         })
     }
 }
@@ -167,10 +173,12 @@ function styleGrid() {
 
 //left side
 const slider = document.querySelector('.gridnumber');
+const dim = document.querySelector('.dim');
 let dimensions = slider.value;
 let dimensionsDisplay = document.createElement('div')
 dimensionsDisplay.textContent = `${dimensions} x ${dimensions}`;
-side.appendChild(dimensionsDisplay);
+dimensionsDisplay.classList.add('size');
+dim.appendChild(dimensionsDisplay);
 
 slider.addEventListener('change', () => {
     dimensions = slider.value;
@@ -188,14 +196,18 @@ function removeGrid(){
     }
 }
 
+const colorSection = document.createElement('div');
+colorSection.classList.add('colorsection');
+side.appendChild(colorSection);
+
 const selectMode = document.createElement('div');
 selectMode.classList.add('selectmode');
 selectMode.textContent = 'Click to toggle between modes';
-side.appendChild(selectMode);
+colorSection.appendChild(selectMode);
 
 const psychedelicButton = document.createElement('button');
 psychedelicButton.textContent = `Normal Mode`;
-side.appendChild(psychedelicButton);
+colorSection.appendChild(psychedelicButton);
 
 let psychedelicCount = 0;
 psychedelicButton.textContent = `Normal Mode`;

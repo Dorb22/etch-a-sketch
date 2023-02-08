@@ -7,6 +7,10 @@ body{
     background-color: #dccde8;
     width: 30%;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .colorpicker{
@@ -75,7 +79,42 @@ body{
 .startbutton{
     padding: 4px 20px 4px 20px;
     position: absolute;
-    bottom: 180px;
+    bottom: 19px;
     color: #00000021;
 }
 
+.gridlabel{
+    font-size: 30px;
+}
+
+.gridnumber{
+    width: 230px;
+}
+
+.dim {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.size{
+    font-size: 20px;
+}
+
+.color{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.colorlabel{
+    font-size: 30px;
+}
+
+.colorsection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
