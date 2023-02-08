@@ -12,7 +12,7 @@ let grid;
 let state = 'normal';
 let gridNumber;
 
-let gridColor;
+let gridColor = '#000000';
 const colorpicker = side.querySelector('.colorpicker');
 let pickedColor = colorpicker.value;
 colorpicker.addEventListener('change', () => {
@@ -54,23 +54,71 @@ function selectGrid() {
 }
 
 function fillGrid(){
+    let gridBackground;
     for(let i=0; i < gridArray.length; i++){
         gridArray[i].addEventListener('mouseover', () => {
-            if (state === 'psychedelic'){
-            let randomColor = '#' + (Math.floor(Math.random()*16777215).toString(16));
-            gridArray[i].style.backgroundColor = randomColor;
+            if (state === 'psychedelic'){  
+                let randomColor = '#' + (Math.floor(Math.random()*16777215).toString(16));
+                gridArray[i].style.backgroundColor = randomColor;
             }
             else if (state === 'normal') {
                 gridArray[i].style.backgroundColor = gridColor;
             }
-            else if (state === 'shadow'){
-                gridArray[i].style.backgroundColor = `#00000021`;
-                console.log(gridColor);
-                console.log(state);
+            else if (state === 'shadow') {
+                if(gridArray[i].style.backgroundColor === ''){
+                gridBackground = 'rgb(255, 255, 255)';
+                }
+                else if (gridArray[i].style.backgroundColor === 'rgb(0, 0, 0)'){
+                gridBackground = 'rgb(0, 0, 0)';
+                }
+                else{ 
+                gridBackground = gridArray[i].style.backgroundColor;
+                }
+
+                let remove1 = gridBackground.replace('rgb(', '');
+                let remove2 = remove1.replace(')', '');
+                let rgbArray  = remove2.split(', ');
+                let rValue = rgbArray[0];
+                let gValue = rgbArray[1];
+                let bValue = rgbArray[2];
+                let hexa = rgbToHex(+rValue, +gValue, +bValue);
+                gridArray[i].style.backgroundColor = newShade(hexa, -20);
             }
         })
     }
 }
+
+function toHex(){
+    
+}
+
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+  }
+  
+  function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  }
+
+  const newShade = (hexColor, magnitude) => {
+    hexColor = hexColor.replace(`#`, ``);
+    if (hexColor.length === 6) {
+        const decimalColor = parseInt(hexColor, 16);
+        let r = (decimalColor >> 16) + magnitude;
+        r > 255 && (r = 255);
+        r < 0 && (r = 0);
+        let g = (decimalColor & 0x0000ff) + magnitude;
+        g > 255 && (g = 255);
+        g < 0 && (g = 0);
+        let b = ((decimalColor >> 8) & 0x00ff) + magnitude;
+        b > 255 && (b = 255);
+        b < 0 && (b = 0);
+        return `#${(g | (b << 8) | (r << 16)).toString(16)}`;
+    } else {
+        return hexColor;
+    }
+};
 
 startButton.addEventListener('mouseover', () => {
     startButton.style.backgroundColor = '#14BDEB';
